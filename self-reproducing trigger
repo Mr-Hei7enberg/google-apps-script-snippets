@@ -1,0 +1,23 @@
+function trigger_() {
+  try {
+    doSome();
+  } catch (error) {
+    console.error(error.message, error);
+  } finally {
+    var now = new Date();
+    var nextTime = new Date();
+    var days = 1;
+    var hours = 8;
+    var minutes = 0;
+    var seconds = 0;
+    console.log(nextTime);
+    nextTime.setHours(0, 0, days * 24 * 3600 + hours * 3600 + minutes * 60 + seconds);
+    console.log(nextTime);
+    var delta = nextTime.getTime() - now.getTime();
+    ScriptApp.newTrigger('trigger_')
+    .timeBased()
+    .after(delta)
+    .inTimezone("Europe/Kiev") // set your time zone
+    .create();
+  }
+}
